@@ -27,7 +27,13 @@ function List({ breeds }) {
                 Display List
             </button>
             <ul>
-
+                {display && breeds.map((breed, idx) => (
+                    <li
+                        key={idx}
+                    >
+                        {breed}
+                    </li>
+                ))}
             </ul>
         </>
     )
