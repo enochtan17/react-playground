@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import Search from './components/Search'
+import Form from './components/Form'
+import List from './components/List'
+import './App.css'
 
 function App() {
+
+  const [breeds, setBreeds] = useState([])
+
+  useEffect(() => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+    .then(res => res.json())
+    .then(data => {
+      setBreeds(Object.keys(data.message))
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      Hello World
+      <hr></hr>
+      <Form breeds={breeds} />
+      <hr></hr>
+      <List breeds={breeds} />
+      <hr></hr>
+      <Search breeds={breeds} />
+      <hr></hr>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
